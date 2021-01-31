@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5 id="total-price">$1,278</h5>
+                        <h5 id="tax-amount">$0</h5>
+                        <h5 id="grand-amount">$1,278</h5>
                      </div>
                   </div>
                </div>
@@ -118,6 +118,7 @@
             }
             productInput.value = productNewCount;
             // const caseTotal = productNewCount * 59;
+            document.getElementById(product + '-count').value = productNewCount;
             let productTotal = 0;
             if(product == 'phone'){
                productTotal = productNewCount * 1219;
@@ -128,8 +129,54 @@
 
             document.getElementById(product + "-total").innerText = '$' + productTotal;
 
+            // called sub total part calculateTotal 
+            calculateTotal();
+
          }
 
+         // // sub total part calculation  working
+         // function calculateTotal(){
+         //    const phoneInput= document.getElementById('phone-count');
+         //    const phoneCount = parseInt(phoneInput.value);
+
+         //    const caseInput = document.getElementById('case-count');
+         //    const caseCount = parseInt(caseInput.value);
+
+         //    const totalPrice = phoneCount * 1219 + caseCount * 59;
+         //    document.getElementById('total-price').innerText = '$' + totalPrice;
+
+         // }
+
+         function calculateTotal(){
+            const phoneCount = getInputValue('phone');
+
+            const caseCount = getInputValue('case');
+            
+
+            const totalPrice = phoneCount * 1219 + caseCount * 59;
+            document.getElementById('total-price').innerText = '$' + totalPrice;
+
+            //tax calculate
+            const tax = totalPrice * 0.1;
+            document.getElementById('tax-amount').innerText = '$' + tax;
+
+            //grand total calculate
+
+            const grandTotal = totalPrice + tax;
+            document.getElementById('grand-amount').innerText = '$' + grandTotal;
+
+
+
+         }
+
+         
+         // with one function total part calculation , no repeat 
+         function getInputValue(product){
+            const productInput = document.getElementById(product + '-count');
+            const productCount = parseInt(productInput.value);
+            return productCount;
+
+         }
 
 
 
