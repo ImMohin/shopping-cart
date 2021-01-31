@@ -84,10 +84,10 @@
 
          //phone price with quantity
          document.getElementById("phone-increase").addEventListener('click', function(){
-            handlePhoneCount(true);
+            handleProductChange('phone', true);
          });
          document.getElementById("phone-decrease").addEventListener('click', function(){
-            handlePhoneCount(false);
+            handleProductChange('phone', false);
          });
 
 
@@ -106,19 +106,27 @@
          // with one single function work no duplicate item  
          function handleProductChange(product , isIncrease){
             // value capture 
-            const caseInput = document.getElementById(product + "-count");
-            const caseCount = parseInt(caseInput.value);
-            // const caseNewCount = caseCount -1;
-            let caseNewCount = 0;
+            const productInput = document.getElementById(product + "-count");
+            const productCount = parseInt(productInput.value);
+            // const caseNewCount = productCount -1;
+            let productNewCount = 0;
             if(isIncrease == true){
-               caseNewCount = caseCount + 1;
+               productNewCount = productCount + 1;
             }
-            if(isIncrease == false && caseCount > 0){
-               caseNewCount = caseCount -1;
+            if(isIncrease == false && productCount > 0){
+               productNewCount = productCount -1;
             }
-            caseInput.value = caseNewCount;
-            const caseTotal = caseNewCount * 59;
-            document.getElementById(product + "-total").innerText = '$' + caseTotal;
+            productInput.value = productNewCount;
+            // const caseTotal = productNewCount * 59;
+            let productTotal = 0;
+            if(product == 'phone'){
+               productTotal = productNewCount * 1219;
+            }
+            if(product == 'case'){
+               productTotal = productNewCount * 59;
+            }
+
+            document.getElementById(product + "-total").innerText = '$' + productTotal;
 
          }
 
